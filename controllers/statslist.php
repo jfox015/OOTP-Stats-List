@@ -4,16 +4,10 @@ class statslist extends Front_Controller {
 
 	//--------------------------------------------------------------------
 
-	public function __construct()
-	{
-		parent::__construct();
-		$this->lang->load('statslist');
-	}
-
-	//--------------------------------------------------------------------
-
 	public function index() 
 	{
+		$this->lang->load('statslist');
+		
 		$settings = $this->settings_lib->find_all();
 		
 		$this->load->model('ootp_web_toolkit/leagues_model');

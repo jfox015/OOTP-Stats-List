@@ -1,56 +1,61 @@
-<div>
-	<h1 class="page-header"><?php echo lang('statslist_view_header'); ?></h1>
-	<p><?php echo lang('statslist_view_notes'); ?></p>
-</div>
-<div style="float:right;width:55%;text-align:right;">
-<?php
-echo form_open($this->uri->uri_string(), ' method="post" class="form-horizontal"');
-if (isset($years) && sizeof($years) > 0)
-{
-	echo form_label("Select Season:", "year", array('style'=>'display: inline-block !important;'))."\n";
-	echo '<select name="year" id="year" style="width:auto;">'."\n";
-	foreach ($years as $year) 
-	{
-		echo '<option value="'.$year.'"';
-		if (isset($league_year) && $year == $league_year) { echo " selected"; }
-		echo '>'.$year.'</option>'."\n";
-	}
-	echo '</select>'."\n";
-}
-if (isset($teams) && sizeof($teams) > 0) 
-{
-	echo form_label("Select Team:", "team_id", array('style'=>'display: inline-block !important;'));
-	echo '<select id="team_id" name="team_id" style="width:auto;">'."\n";
-	foreach($teams as $team) 
-	{
-		echo "\t".'<option value="'.$team['team_id'].'"';
-		if (isset($team_id) && $team['team_id'] == $team_id) { echo " selected"; }
-		echo '>'.str_replace(".","",$team['name']." ".$team['nickname']).'</option>'."\n";
-	}
-	echo '</select>'."\n";
-	echo form_submit("submit","Go",' id="submitBtn"');
-}
-echo form_close()."\n"; 
-?>
-</div>
+<h1 class="page-header"><?php echo lang('statslist_view_header'); ?></h1>
+			
+<div class="container-fluid">
+	<div class="row-fluid rowbg content">
+		<div class="span12">
+			<p><?php echo lang('statslist_view_notes'); ?></p>
+		</div>
+	</div>
+	<div class="row-fluid rowbg content">
+		<div class="span6">
+		<?php if (isset($team_details)) : ?>
+			<div class="span2">
+			<img src="<?php echo $settings['ootp.asset_url'].'images/'.str_replace(".","_50.",$team_details->logo_file); ?>" width="50" height="50" border="0" alt="<?php echo $team_details->name." ".$team_details->nickname; ?>" title="<?php echo $team_details->name." ".$team_details->nickname; ?>" />
+			</div>
+			<div class="span10">
+			<h2><?php echo ($team_details->name." ".$team_details->nickname); ?></h2>
+			</div>
+		<?php 
+		endif;
+		?>
+		</div>
 
-<div style="float:left; width:44%;">
-<?php if (isset($team_details)) : ?>
-	<div style="float:left; width:55px; margin-right:10px;">
-	<img src="<?php echo $settings['ootp.asset_url'].'images/'.str_replace(".","_50.",$team_details->logo_file); ?>" width="50" height="50" border="0" alt="<?php echo $team_details->name." ".$team_details->nickname; ?>" title="<?php echo $team_details->name." ".$team_details->nickname; ?>" />
+		<div class="span6" style="text-align:right;">
+		<?php
+		echo form_open($this->uri->uri_string(), ' method="post" class="form-horizontal"');
+		if (isset($years) && sizeof($years) > 0)
+		{
+			echo form_label("Select Season:", "year", array('style'=>'display: inline-block !important;'))."\n";
+			echo '<select name="year" id="year" style="width:auto;">'."\n";
+			foreach ($years as $year) 
+			{
+				echo '<option value="'.$year.'"';
+				if (isset($league_year) && $year == $league_year) { echo " selected"; }
+				echo '>'.$year.'</option>'."\n";
+			}
+			echo '</select>'."\n";
+		}
+		if (isset($teams) && sizeof($teams) > 0) 
+		{
+			echo form_label("Select Team:", "team_id", array('style'=>'display: inline-block !important;'));
+			echo '<select id="team_id" name="team_id" style="width:auto;">'."\n";
+			foreach($teams as $team) 
+			{
+				echo "\t".'<option value="'.$team['team_id'].'"';
+				if (isset($team_id) && $team['team_id'] == $team_id) { echo " selected"; }
+				echo '>'.str_replace(".","",$team['name']." ".$team['nickname']).'</option>'."\n";
+			}
+			echo '</select>'."\n";
+			echo form_submit("submit","Go",' id="submitBtn"');
+		}
+		echo form_close()."\n"; 
+		?>
+		</div>
 	</div>
-	<div style="float:left; width:65%;">
-	<h2><?php echo ($team_details->name." ".$team_details->nickname); ?></h2>
-	</div>
-    <br style="clear: both;" />
-<?php 
-endif;
-?>
-</div>
-	
-<?php if (isset($records) && is_array($records) && count($records)) :  ?>
+	<div class="row-fluid rowbg content">
+		<?php if (isset($records) && is_array($records) && count($records)) :  ?>
     <br clear="all" />
-	<div>
+	<div class="span12">
     <?php
 	$types = array('Batting','Pitching');
 	foreach ($types as $type) :
@@ -134,3 +139,5 @@ endif;
     </div>
 <?php
 endif; ?>
+	</div>
+</div>
