@@ -8,8 +8,8 @@ class settings extends Admin_Controller {
 	{
 		parent::__construct();
 
-		$this->auth->restrict('OOLM.StatsList.Manage');
-		 if (!class_exists('Activity_model'))
+		$this->auth->restrict('StatsList.Settings.View');
+		if (!class_exists('Activity_model'))
         {
             $this->load->model('activities/Activity_model', 'activity_model', true);
         }
@@ -22,6 +22,7 @@ class settings extends Admin_Controller {
 	{
 		if ($this->input->post('submit'))
         {
+            $this->auth->restrict('StatsList.Settings.Manage');
             if ($this->save_settings())
             {
                 Template::set_message(lang('sl_settings_saved'), 'success');
