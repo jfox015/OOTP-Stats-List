@@ -60,4 +60,15 @@ class statslist extends Front_Controller {
 		Template::set_view('statslist/index');
 		Template::render();
 	}
+
+    public function stats_test()
+    {
+        $this->load->library('open_sports_toolkit/stats');
+        Stats::init('baseball','ootp');
+        Template::set('stats_list', Stats::get_stats_list());
+        Template::set('player_query', Stats::get_player_stats(231,TYPE_OFFENSE,CLASS_STANDARD,STATS_CAREER,array('limit',10)));
+
+        Template::set_view('statslist/test');
+        Template::render();
+    }
 }
