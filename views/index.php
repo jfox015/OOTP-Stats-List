@@ -65,13 +65,11 @@
 		<table class="table table-striped table-bordered">
 		<thead>
 		<tr>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>POS</th>
-			<th>Age</th>
-			<th>T</th>
-			<th>B</th>
-			<?php if ($type == 'Batting') : ?>
+			<?php 
+			foreach ($headers[$type] as $header) :
+				echo (' <th>'.$header.'</th> '."\n");
+			endforeach;
+			/*if ($type == 'Batting') : ?>
 			<th>AVG</th>
 			<th>G</th>
 			<th>AB</th>
@@ -95,7 +93,9 @@
 			<th>HRA</th>
 			<th>SV</th>
 			<?php
-			endif; ?>
+			endif; 
+			*/
+			?>
 		</tr>
 		</thead>
 		<tbody>

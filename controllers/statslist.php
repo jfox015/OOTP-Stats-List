@@ -43,11 +43,16 @@ class statslist extends Front_Controller {
 					}
 				}
 				$this->load->model('open_sports_toolkit/players_model');
-                $records = array (
-                    'Batting'=>$this->players_model->get_current_player_stats(231,TYPE_OFFENSE,CLASS_STANDARD,array('season'=>$league_year,'limit'=>1)),
-                    'Pitching'=>$this->players_model->get_current_player_stats(311,TYPE_SPECIALTY,CLASS_STANDARD,array('season'=>$league_year,'limit'=>1))
+                $headers = array (
+					'Batting'=>stats_class(TYPE_OFFENSE, CLASS_STANDARD, array('GROUP_PLAYERS','GROUP_GENERAL')),
+					'Pitching'=>stats_class(TYPE_SPECIALTY,CLASS_STANDARD, array('GROUP_PLAYERS','GROUP_GENERAL'))
+				);
+				$records = array (
+                    'Batting'=>$this->players_model->get_current_player_stats(231,TYPE_OFFENSE,$headers['Batting'],array('where'=>array('season'=>$league_year),'limit'=>1)),
+                    'Pitching'=>$this->players_model->get_current_player_stats(311,TYPE_SPECIALTY,$headers['Pitching'],array('where'=>array('season'=>$league_year),'limit'=>1))
                 );
 				Template::set('records',$records);
+				Template::set('headers',$headers);
 				Template::set('league_year',$league_year);
 				Template::set('team_id',$team_id);
 				Template::set('team_details',$this->teams_model->select('team_id, name, nickname, logo_file')->find($team_id));
