@@ -55,8 +55,10 @@
 	<div class="row-fluid rowbg content">
 		<?php if (isset($records) && is_array($records) && count($records)) :  ?>
     <br clear="all" />
+    <!--div class="span12"><?php //echo("Batting SQL  = <br />".$batting_query."<br/ >"); ?></div>
+    <div class="span12"><?php //echo("Pitching SQL  = <br />".$pitching_query."<br/ >"); ?></div-->
 	<div class="span12">
-    <?php
+	<?php
 	$types = array('Batting','Pitching');
 	foreach ($types as $type) :
 		if (isset($records[$type]) && is_array($records[$type]) && count($records[$type])) :
@@ -67,34 +69,8 @@
 		<tr>
 			<?php 
 			foreach ($headers[$type] as $header) :
-				echo (' <th>'.$header.'</th> '."\n");
+				echo (' <th>'.lang($header."acyn").'</th> '."\n");
 			endforeach;
-			/*if ($type == 'Batting') : ?>
-			<th>AVG</th>
-			<th>G</th>
-			<th>AB</th>
-			<th>R</th>
-			<th>H</th>
-			<th>HR</th>
-			<th>RBI</th>
-			<th>BB</th>
-			<th>K</th>
-			<th>SB</th>
-			<th>CS</th>
-			<?php else: ?>
-			<th>W</th>
-			<th>L</th>
-			<th>ERA</th>
-			<th>G</th>
-			<th>GS</th>
-			<th>IP</th>
-			<th>BB</th>
-			<th>K</th>
-			<th>HRA</th>
-			<th>SV</th>
-			<?php
-			endif; 
-			*/
 			?>
 		</tr>
 		</thead>
@@ -104,7 +80,7 @@
 		<tr>
 			<?php foreach($player as $field => $value) : ?>
 				<?php if ($field != 'id' && $field != 'role') :
-				switch ($field) :
+				/*switch ($field) :
 					case 'position':
 						if ($value==1) $value = $player['role'];
 						$value = get_pos($value);
@@ -124,7 +100,7 @@
 						break;
 					default:
 						break;
-				endswitch;
+				endswitch;*/
 				?>
 				<td><?php echo $value; ?></td>
 				<?php endif; ?>
