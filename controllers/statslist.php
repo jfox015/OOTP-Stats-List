@@ -14,7 +14,9 @@ class statslist extends Front_Controller {
 		$this->load->model('open_sports_toolkit/teams_model');
 		
 		$years = $this->leagues_model->get_all_seasons($settings['ootp.league_id']);
-		
+
+		$this->load->helper('open_sports_toolkit/general');
+        
 		if ($this->input->post('submit')) 
 		{
             $this->load->library('open_sports_toolkit/stats');
@@ -45,15 +47,15 @@ class statslist extends Front_Controller {
 				$team_id = (int)$team_id;
 				$league_year = (int)$league_year;
 				$headers = array (
-					'Batting'=>stats_class(TYPE_OFFENSE, CLASS_COMPLETE, array('DEFAULT','GENERAL')),
-					'Pitching'=>stats_class(TYPE_SPECIALTY,CLASS_COMPLETE, array('DEFAULT','GENERAL'))
+					'Batting'=>stats_class(TYPE_OFFENSE, CLASS_COMPLETE, array('NAME','GENERAL')),
+					'Pitching'=>stats_class(TYPE_SPECIALTY,CLASS_COMPLETE, array('NAME','GENERAL'))
 				);
 				$records = array (
                     'Batting'=>$this->teams_model->get_team_stats($team_id,TYPE_OFFENSE,$headers['Batting'],STATS_SEASON,array('where'=>array('year	'=>$league_year))),
                     'Pitching'=>$this->teams_model->get_team_stats($team_id,TYPE_SPECIALTY,$headers['Pitching'],STATS_SEASON,array('where'=>array('year	'=>$league_year)))
                 );
-				//Template::set('batting_query', $this->teams_model->get_team_stats($team_id,TYPE_OFFENSE,$headers['Batting'],STATS_SEASON,array('where'=>array('year	'=>$league_year),'get_sql'=>true)));
-				//Template::set('pitching_query', $this->teams_model->get_team_stats($team_id,TYPE_SPECIALTY,$headers['Pitching'],STATS_SEASON,array('where'=>array('year	'=>$league_year),'get_sql'=>true)));
+				//Template::set('batting_query', $this->teams_model->get_team_stats($team_id,TYPE_OFFENSE,$headers['Batting'],STATS_SEASON,array('where'=>array('year	'=>$league_year)),true));
+				//Template::set('pitching_query', $this->teams_model->get_team_stats($team_id,TYPE_SPECIALTY,$headers['Pitching'],STATS_SEASON,array('where'=>array('year	'=>$league_year)),true));
 				Template::set('records',$records);
 				Template::set('headers',$headers);
 				Template::set('league_year',$league_year);
@@ -61,10 +63,11 @@ class statslist extends Front_Controller {
 				Template::set('team_details',$this->teams_model->select('team_id, name, nickname, logo_file')->find($team_id));
 			}
 		}
-		$this->load->helper('form');
+        // ASSURE PATH COMPLIANCE TO OOPT VERSION
+        $settings = get_asset_path($settings);
+        $this->load->helper('form');
 		$this->load->helper('url');
-		$this->load->helper('open_sports_toolkit/general');
-        Template::set('teams',$this->teams_model->get_teams_array(($settings['statslist.limit_to_primary'] == 1) ? $settings['ootp.league_id'] : false));
+		Template::set('teams',$this->teams_model->get_teams_array(($settings['statslist.limit_to_primary'] == 1) ? $settings['ootp.league_id'] : false));
 		Template::set('years',$years);
 		Template::set('settings',$settings);
 		Template::set_view('statslist/index');

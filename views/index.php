@@ -10,7 +10,7 @@
 		<div class="span6">
 		<?php if (isset($team_details)) : ?>
 			<div class="span2">
-			<img src="<?php echo $settings['ootp.asset_url'].'images/'.str_replace(".","_50.",$team_details->logo_file); ?>" width="50" height="50" border="0" alt="<?php echo $team_details->name." ".$team_details->nickname; ?>" title="<?php echo $team_details->name." ".$team_details->nickname; ?>" />
+			<img src="<?php echo $settings['ootp.team_logo_path'].str_replace(".","_50.",$team_details->logo_file); ?>" width="50" height="50" border="0" alt="<?php echo $team_details->name." ".$team_details->nickname; ?>" title="<?php echo $team_details->name." ".$team_details->nickname; ?>" />
 			</div>
 			<div class="span10">
 			<h2><?php echo ($team_details->name." ".$team_details->nickname); ?></h2>
@@ -69,7 +69,7 @@
 		<tr>
 			<?php 
 			foreach ($headers[$type] as $header) :
-				echo (' <th>'.lang($header."acyn").'</th> '."\n");
+				echo (' <th>'.lang("acyn_".$header).'</th> '."\n");
 			endforeach;
 			?>
 		</tr>
@@ -79,29 +79,7 @@
 		<?php $player = (array)$player;?>
 		<tr>
 			<?php foreach($player as $field => $value) : ?>
-				<?php if ($field != 'id' && $field != 'role') :
-				/*switch ($field) :
-					case 'position':
-						if ($value==1) $value = $player['role'];
-						$value = get_pos($value);
-						break;
-					case 'throws':
-					case 'bats':
-						$value = get_hand($value);
-						break;
-					case 'avg':
-						$value = sprintf("%.3f",$value);
-						break;
-				   case 'era':
-						$value = sprintf("%.2f",$value);
-						break;
-				   case 'ip':
-						$value = sprintf("%.1f",$value);
-						break;
-					default:
-						break;
-				endswitch;*/
-				?>
+				<?php if ($field != 'id' && $field != 'role') :?>
 				<td><?php echo $value; ?></td>
 				<?php endif; ?>
 			<?php endforeach; ?>
