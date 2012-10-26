@@ -10,7 +10,7 @@
 		<div class="span6">
 		<?php if (isset($team_details)) : ?>
 			<div class="span2">
-			<img src="<?php echo $settings['ootp.team_logo_url'].str_replace(".","_50.",$team_details->logo_file); ?>" width="50" height="50" border="0" alt="<?php echo $team_details->name." ".$team_details->nickname; ?>" title="<?php echo $team_details->name." ".$team_details->nickname; ?>" />
+			<img src="<?php echo $settings['osp.team_logo_url'].str_replace(".","_50.",$team_details->logo_file); ?>" width="50" height="50" border="0" alt="<?php echo $team_details->name." ".$team_details->nickname; ?>" title="<?php echo $team_details->name." ".$team_details->nickname; ?>" />
 			</div>
 			<div class="span10">
 			<h2><?php echo ($team_details->name." ".$team_details->nickname); ?></h2>

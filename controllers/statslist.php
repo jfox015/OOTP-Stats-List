@@ -57,11 +57,11 @@ class statslist extends Front_Controller {
 					'Pitching' => Stats::get_stats_fields(TYPE_SPECIALTY, $stat_classes['Pitching'], 'lang')
 				);
 				$records = array (
-                    'Batting'=>$this->teams_model->get_team_stats($team_id,TYPE_OFFENSE,$stat_classes['Batting'],STATS_SEASON,array('where'=>array('year	'=>$league_year))),
-                    'Pitching'=>$this->teams_model->get_team_stats($team_id,TYPE_SPECIALTY,$stat_classes['Pitching'],STATS_SEASON,array('where'=>array('year	'=>$league_year)))
+                    'Batting'=>$this->teams_model->get_team_stats($team_id,TYPE_OFFENSE,$stat_classes['Batting'],STATS_SEASON,RANGE_SEASON,array('season'=>$league_year)),
+                    'Pitching'=>$this->teams_model->get_team_stats($team_id,TYPE_SPECIALTY,$stat_classes['Pitching'],STATS_SEASON,RANGE_SEASON,array('season'=>$league_year))
                 );
-				//Template::set('batting_query', $this->teams_model->get_team_stats($team_id,TYPE_OFFENSE,$headers['Batting'],STATS_SEASON,array('where'=>array('year	'=>$league_year)),true));
-				//Template::set('pitching_query', $this->teams_model->get_team_stats($team_id,TYPE_SPECIALTY,$headers['Pitching'],STATS_SEASON,array('where'=>array('year	'=>$league_year)),true));
+				//Template::set('batting_query', $this->teams_model->get_team_stats($team_id,TYPE_OFFENSE,$headers['Batting'],STATS_SEASON,RANGE_SEASON,array('where'=>array('year'=>$league_year)),true));
+				//Template::set('pitching_query', $this->teams_model->get_team_stats($team_id,TYPE_SPECIALTY,$headers['Pitching'],STATS_SEASON,RANGE_SEASON,array('where'=>array('year'=>$league_year)),true));
 				Template::set('records',$records);
 				Template::set('headers',$headers);
 				Template::set('league_year',$league_year);
