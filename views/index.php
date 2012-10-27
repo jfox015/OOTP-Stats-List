@@ -53,45 +53,19 @@
 		</div>
 	</div>
 	<div class="row-fluid rowbg content">
-		<?php if (isset($records) && is_array($records) && count($records)) :  ?>
-    <br clear="all" />
-    <!--div class="span12"><?php //echo("Batting SQL  = <br />".$batting_query."<br/ >"); ?></div>
-    <div class="span12"><?php //echo("Pitching SQL  = <br />".$pitching_query."<br/ >"); ?></div-->
-	<div class="span12">
-	<?php
-	$types = array('Batting','Pitching');
-	foreach ($types as $type) :
-		if (isset($records[$type]) && is_array($records[$type]) && count($records[$type])) :
-		echo ('<h3>'.$league_year." ".$type.' Stats</h3>');
-        ?>
-		<table class="table table-striped table-bordered">
-		<thead>
-		<tr>
-			<?php 
-			foreach ($headers[$type] as $header) :
-				echo (' <th>'.lang("acyn_".$header).'</th> '."\n");
-			endforeach;
-			?>
-		</tr>
-		</thead>
-		<tbody>
-		<?php foreach ($records[$type] as $player) : ?>
-		<?php $player = (array)$player;?>
-		<tr>
-			<?php foreach($player as $field => $value) : ?>
-				<?php if ($field != 'id' && $field != 'role') :?>
-				<td><?php echo $value; ?></td>
-				<?php endif; ?>
-			<?php endforeach; ?>
-		</tr>
-		<?php endforeach; ?>
-		</tbody>
-		</table>
-		<?php 
+		<div class="span12">
+		<!-- BATTING -->
+		<?php
+		if (isset($batting)) :
+			echo($batting);
 		endif;
-	endforeach;  ?>
+		?>
+		<!-- PITCHING -->
+		<?php
+		if (isset($pitching)) :
+			echo($pitching);
+		endif;
+		?>
+		</div>
     </div>
-<?php
-endif; ?>
-	</div>
 </div>
