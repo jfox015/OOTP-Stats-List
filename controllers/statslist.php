@@ -48,7 +48,12 @@ class statslist extends Front_Controller {
 						$league_year = date('Y',$currDate);
 					}
 				}
-				$team_id = (int)$team_id;
+                if (in_array('players',module_list(true)))
+                {
+                    modules::run('players/player_link_init');
+                    $this->load->helper('players/players');
+                }
+                $team_id = (int)$team_id;
 				$league_year = (int)$league_year;
 				$stat_classes = array (
 					'Batting'=>stats_class(TYPE_OFFENSE, CLASS_COMPLETE, array('NAME','GENERAL')),

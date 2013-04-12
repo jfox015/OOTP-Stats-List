@@ -1,5 +1,7 @@
 <h1 class="page-header"><?php echo lang('statslist_view_header'); ?></h1>
-			
+
+<?php if(isset($popup_template)) { echo($popup_template); } ?>
+
 <div class="container-fluid">
 	<div class="row-fluid rowbg content">
 		<div class="span12">
