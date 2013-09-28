@@ -60,8 +60,8 @@ class statslist extends Front_Controller {
 					'Pitching'=>stats_class(TYPE_SPECIALTY,CLASS_COMPLETE, array('NAME','GENERAL'))
 				);
 				$records = array (
-                    'Batting'=>Stats::get_stats(ID_TEAM,$team_id,TYPE_OFFENSE,$stat_classes['Batting'],STATS_SEASON,RANGE_SEASON,array('year'=>$league_year)),
-                    'Pitching'=>Stats::get_stats(ID_TEAM,$team_id,TYPE_SPECIALTY,$stat_classes['Pitching'],STATS_SEASON,RANGE_SEASON,array('year'=>$league_year))
+                    'Batting'=>Stats::get_stats(ID_TEAM,$team_id,TYPE_OFFENSE,$stat_classes['Batting'],STATS_SEASON,RANGE_SEASON,array('year'=>$league_year,'no_operator'=>true)),
+                    'Pitching'=>Stats::get_stats(ID_TEAM,$team_id,TYPE_SPECIALTY,$stat_classes['Pitching'],STATS_SEASON,RANGE_SEASON,array('year'=>$league_year,'no_operator'=>true))
                 );
 				// RENDER STATS TO VIEW CODE				
 				//$batting = $records['Batting'];
